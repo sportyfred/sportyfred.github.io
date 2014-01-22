@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html>
+  <head><title>Proj Rumba iPhone test</title>
+    <meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <style>
+           #tripmeter {
+        padding: 2px;
+        margin: 2px 0;
+      }
+      p {
+        color: #222;
+        font: 12px Arial;
+      }
+      
+          </style>
+  </head>
+  <body>
+  <script src="http://mrdoob.github.com/three.js/build/three.min.js"></script>
+		<script>
+
+			// workaround for chrome bug: http://code.google.com/p/chromium/issues/detail?id=35980#c12
+			if ( window.innerWidth === 0 ) { window.innerWidth = parent.innerWidth; window.innerHeight = parent.innerHeight; }
+							
+			var camera, scene, renderer;
+			var geometry, material, mesh;
+
+			init();
+			animate();
+
+			function init() {
+				
+				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera.position.z = 500;
+        camera.position.x = 0;
+        camera.position.y = 0;
+
+				scene = new THREE.Scene();
+
+				geometry = new THREE.CubeGeometry( 200, 200, 200 );
+         
+				material = new THREE.MeshBasicMaterial({ 
+          transparent: true, 
+          color: 0xff00ff, 
+          wireframe: true, 
+        //transparent: true,                        
+        //opacity: 0.5,
+          side:THREE.DoubleSide } );
+
+        //var ztrans = a * Math.PI / 180;
+
+				mesh = new THREE.Mesh( geometry, material );
+      //  mesh.position.set(0.0, 0.0, ztrans);
+
+
+
+				scene.add( mesh );
+
+				renderer = new THREE.CanvasRenderer();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				document.body.appendChild( renderer.domElement );
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				mesh.rotation.x =  b * Math.PI / 180;
+				mesh.rotation.y =  g * Math.PI / 180;
+        mesh.rotation.z =  a * Math.PI / 180;
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+    <div id="tripmeter">
+      
+<p>rotate x = beta, rotate y = gamma
+        <span id="test"></span><br>
+    
+        <span id="test2"></span><br>
+
+   
+
+      <span id="compass"></span><br>
+
+   
+ 
+        
+       lat:  <span id="test3"></span><br>
+
+
+        
+       long:  <span id="test4"></span><br>
+
+          <span id="acc"></span><br>
+             <span id="accgrav"></span><br>
+
+   
+ </p>
+    </div>
+    <script>
+   
+
+        var startPos;
+      
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition(function(startPos) {
+ 
+  document.getElementById("test3").innerHTML = startPos.coords.latitude;
+  document.getElementById("test4").innerHTML = startPos.coords.longitude;
+
+
+          },  function (error)
+    {
+      switch(error.code) 
+      {
+        case error.TIMEOUT:
+          alert ('Timeout');
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert ('Position unavailable');
+          break;
+        case error.PERMISSION_DENIED:
+          alert ('Permission denied');
+          break;
+        case error.UNKNOWN_ERROR:
+          alert ('Unknown error');
+          break;
+      }
+    });
+
+         
+        }
+
+        handleOrientationEvent = function(e) {
+
+          var compassHeading = e.webkitCompassHeading;
+      
+            alpha = e.alpha,
+            beta = e.beta,
+            gamma = e.gamma;
+          a = Math.round( alpha );
+        b = Math.round( beta ) ;
+         g = Math.round( gamma );
+
+ document.getElementById("compass").innerHTML = 'compass: ' + (compassHeading) + ' grader';
+  document.getElementById("test2").innerHTML = 'alpha: ' + a + ' beta: ' + b + ' gamma: ' + g;
+        };
+    
+   window.addEventListener('deviceorientation', handleOrientationEvent, false);
+ 
+
+ // Define an event handler function for processing the deviceâ€™s acceleration values
+ 
+    handleDeviceMotionEvent = function(e) {
+ 
+        // Get the current acceleration values in 3 axes and find the greatest of these
+ 
+        var acc = e.acceleration,
+            maxAcc = Math.max(acc.x, acc.y, acc.z),
+ 
+        // Get the acceleration values including gravity and find the greatest of these
+ 
+            accGravity = e.accelerationIncludingGravity,
+            maxAccGravity = Math.max(accGravity.x, accGravity.y, accGravity.z);
+ 
+        // Output to the user the greatest current acceleration value in any axis, as
+        // well as the greatest value in any axis including the effect of gravity
+ 
+         document.getElementById("acc").innerHTML =  'acceleration: ' + maxAcc +  'm/s^2';
+       document.getElementById("accgrav").innerHTML = 'acc incl. gravity: ' + maxAccGravity + 'm/s^2';
+    };
+ 
+// Assign the event handler function to execute when the device is moving
+ 
+window.addEventListener('devicemotion', handleDeviceMotionEvent, false);
+
+
+
+
+      </script>
+      
+              
+        
+        </body>
+</html>
