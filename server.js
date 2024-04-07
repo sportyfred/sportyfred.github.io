@@ -4,7 +4,11 @@ var socket = require('socket.io');
  
  
 app.get('/', function(request, response){
-  response.sendfile(__dirname);
+  response.sendfile(__dirname + "index.html");
+});
+
+app.get('/mp3.mp3', function(request, response){
+  response.sendfile(__dirname + "regnbogedenoise.mp3");
 });
 var activeClients = 0;
  
