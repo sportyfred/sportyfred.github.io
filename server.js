@@ -4,7 +4,7 @@ var socket = require('socket.io');
  
  
 app.get('/', function(request, response){
-  response.sendfile(__dirname + "/index.html");
+  response.sendfile(__dirname);
 });
 var activeClients = 0;
  
