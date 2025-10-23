@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Sandviken Map with Markers</title>
+  <title>STADENS POESI</title>
   <style>
     html, body {
       height: 100%;
@@ -14,9 +14,21 @@
       height: 100%;
       width: 100%;
     }
+    .subtitle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 1000;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
+  <div class="subtitle">en vandring till åtta dikter av Stig Sjödin</div>
   <div id="googleMap"></div>
   <script>
     function initMap() {
@@ -24,33 +36,89 @@
         center: { lat: 60.6185, lng: 16.7800 },
         zoom: 16,
         styles: [
-          { "elementType": "geometry", "stylers": [{ "color": "#efe0c7" }] },
-          { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#9ad0e8" }] },
-          { "featureType": "landscape.man_made", "elementType": "geometry.fill", "stylers": [{ "color": "#e9d2b2" }] },
-          { "featureType": "road", "elementType": "geometry", "stylers": [{ "color": "#f2d9b8" }, { "lightness": 50 }] },
-          { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{ "color": "#bddfaa" }] },
-          { "elementType": "labels.text.fill", "stylers": [{ "color": "#5b4b3a" }] },
-          { "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }, { "weight": 1 }] }
+          { featureType: "poi.business", stylers: [{ visibility: "off" }] },
+          { featureType: "road", elementType: "labels", stylers: [{ visibility: "on" }] },
+          { featureType: "poi.place_of_worship", stylers: [{ visibility: "on" }] },
+          { featureType: "poi.school", stylers: [{ visibility: "on" }] },
+          { featureType: "poi.government", stylers: [{ visibility: "on" }] },
+          { featureType: "poi.medical", stylers: [{ visibility: "on" }] },
+          { featureType: "poi", elementType: "labels.text", stylers: [{ visibility: "on" }] }
         ]
       });
 
       const markers = [
-        { number: 1, lat: 60.6223, lng: 16.7836 },
-        { number: 2, lat: 60.6152, lng: 16.7848 },
-        { number: 3, lat: 60.6160, lng: 16.7815 },
-        { number: 4, lat: 60.6169185, lng: 16.7797732 },
-        { number: 5, lat: 60.6150, lng: 16.7760 },
-        { number: 6, lat: 60.6190, lng: 16.7740 },
-        { number: 7, lat: 60.6198, lng: 16.7730 },
-        { number: 8, lat: 60.6208395, lng: 16.7802191 }
+        {
+          number: 1,
+          lat: 60.6223,
+          lng: 16.7836,
+          title: "Andakt",
+          description: "Dikten Andakt, invid nordvästra murresten av Sandvikens gamla kyrka, ingår i diktsamlingen ”Har ni flaggproblem?” (1970)."
+        },
+        {
+          number: 2,
+          lat: 60.6152,
+          lng: 16.7848,
+          title: "I åttan, där vevaxlarna...",
+          description: "Vid ånghammaren nedanför Sandviks gamla huvudkontor finns dikten I åttan, där vevaxlarna... ur ”Sotfragment” (1949)."
+        },
+        {
+          number: 3,
+          lat: 60.6160,
+          lng: 16.7815,
+          title: "Kärleksbrev",
+          description: "Vid norra sluttningen ner mot Dal-Britas damm, sitter dikten Kärleksbrev, ur diktsamlingen ”Livets starka smak” (1974)."
+        },
+        {
+          number: 4,
+          lat: 60.6169185,
+          lng: 16.7797732,
+          title: "Bandvalsaren",
+          description: "På gräsmattan, mitt emot entrén till Smedsgårdens museum, återfinns dikten Bandvalsaren, ur diktsamlingen ”Sotfragment” (1949)."
+        },
+        {
+          number: 5,
+          lat: 60.6150,
+          lng: 16.7760,
+          title: "Tvätterska",
+          description: "Dikten Tvätterska, ur diktsamlingen ”Molnskugga” (1955), finns att läsa i parken nära kanalen vid Barrsätragatsbron."
+        },
+        {
+          number: 6,
+          lat: 60.6190,
+          lng: 16.7740,
+          title: "Himlafrukost",
+          description: "Dikten Himlafrukost ur ”Livets starka smak (1974) finns på slaggstensmuren till vänster bakom restaurangen The Church."
+        },
+        {
+          number: 7,
+          lat: 60.6198,
+          lng: 16.7730,
+          title: "Sätt du fram ur sommarns nätta nyponskålar...",
+          description: "Vid stadshuset, och Smedsgatans norra ände, finner du dikten Sätt du fram ur sommarns nätta nyponskålar..., från diktsamlingen ”Läkebok, nedresa” (1993)."
+        },
+        {
+          number: 8,
+          lat: 60.6208395,
+          lng: 16.7802191,
+          title: "Anteckningar om arbetet",
+          description: "Anteckningar om arbetet ingår i diktsamlingen ”Livets starka smak” (1974). Den finner du på muren vid konsthallens entré."
+        }
       ];
 
       markers.forEach(m => {
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
           map,
           position: { lat: m.lat, lng: m.lng },
           label: String(m.number),
-          title: `Marker ${m.number}`
+          title: m.title
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: `<strong>${m.title}</strong><br>${m.description}`
+        });
+
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
         });
       });
     }
