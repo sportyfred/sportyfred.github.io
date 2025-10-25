@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>STADENS POESI</title>
   <style>
     html, body {
@@ -14,21 +14,126 @@
       height: 100%;
       width: 100%;
     }
-    .gm-style-iw {
-width: 90%; 
-min-height: 50vh;
-}
-      
-    
+
+    /* Valfri: lite snällare InfoWindow, håll det responsivt */
+    .gm-style .gm-style-iw-c {
+      max-width: min(420px, 92vw);
+    }
+    .info {
+      line-height: 1.4;
+      font-size: 14px;
+    }
+    .info h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+    .info p {
+      margin: 0 0 6px;
+    }
+    .info a {
+      color: #0b57d0;
+      text-decoration: none;
+    }
+    .info a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
- <div id="googleMap"></div>
+  <div id="googleMap" role="application" aria-label="Karta över dikter i Sandviken"></div>
+
   <script>
+    // ---- Dina platser/markörer ----
+    const POEMS = [
+      {
+        number: 1,
+        lat: 60.6223,
+        lng: 16.7836,
+        title: "Andakt",
+        description:
+          "Dikten Andakt, invid nordvästra murresten av Sandvikens gamla kyrka, ingår i diktsamlingen ”Har ni flaggproblem?” (1970)."
+      },
+      {
+        number: 2,
+        lat: 60.6152,
+        lng: 16.7848,
+        title: "I åttan, där vevaxlarna...",
+        description:
+          "Vid ånghammaren nedanför Sandviks gamla huvudkontor finns dikten I åttan, där vevaxlarna... ur ”Sotfragment” (1949)."
+      },
+      {
+        number: 3,
+        lat: 60.6160,
+        lng: 16.7815,
+        title: "Kärleksbrev",
+        description:
+          "Vid norra sluttningen ner mot Dal-Britas damm, sitter dikten Kärleksbrev, ur diktsamlingen ”Livets starka smak” (1974)."
+      },
+      {
+        number: 4,
+        lat: 60.6169185,
+        lng: 16.7797732,
+        title: "Bandvalsaren",
+        description:
+          "På gräsmattan, mitt emot entrén till Smedsgårdens museum, återfinns dikten Bandvalsaren, ur diktsamlingen ”Sotfragment” (1949)."
+      },
+      {
+        number: 5,
+        lat: 60.6150,
+        lng: 16.7760,
+        title: "Tvätterska",
+        description:
+          "Dikten Tvätterska, ur diktsamlingen ”Molnskugga” (1955), finns att läsa i parken nära kanalen vid Barrsätragatsbron."
+      },
+      {
+        number: 6,
+        lat: 60.6190,
+        lng: 16.7740,
+        title: "Himlafrukost",
+        description:
+          "Dikten Himlafrukost ur ”Livets starka smak (1974) finns på slaggstensmuren till vänster bakom restaurangen The Church."
+      },
+      {
+        number: 7,
+        lat: 60.6198,
+        lng: 16.7730,
+        title: "Sätt du fram ur sommarns nätta nyponskålar...",
+        description:
+          "Vid stadshuset, och Smedsgatans norra ände, finner du dikten Sätt du fram ur sommarns nätta nyponskålar..., från diktsamlingen ”Läkebok, nedresa” (1993)."
+      },
+      {
+        number: 8,
+        lat: 60.6208395,
+        lng: 16.7802191,
+        title: "Anteckningar om arbetet",
+        description:
+          "Anteckningar om arbetet ingår i diktsamlingen ”Livets starka smak” (1974). Den finner du på muren vid konsthallens entré."
+      }
+    ];
+
+    let map;
+
+    // Reused InfoWindow (så bara en är öppen åt gången)
+    const infoWindow = new google && google.maps ? new google.maps.InfoWindow() : null;
+
+    function infoContent(p) {
+      const gmmLink = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
+      return `
+        <div class="info">
+          <h3>${p.number}. ${p.title}</h3>
+          <p>${p.description}</p>
+          <p>${gmmLink}Hitta hit i Google Maps</a></p>
+        </div>
+      `;
+    }
+
     function initMap() {
-      const map = new google.maps.Map(document.getElementById("googleMap"), {
+      map = new google.maps.Map(document.getElementById("googleMap"), {
         center: { lat: 60.6189135, lng: 16.7788006 },
         zoom: 15,
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: true,
         styles: [
           { featureType: "poi.business", stylers: [{ visibility: "off" }] },
           { featureType: "road", elementType: "labels", stylers: [{ visibility: "on" }] },
@@ -38,86 +143,37 @@ min-height: 50vh;
           { featureType: "poi.medical", stylers: [{ visibility: "on" }] },
           { featureType: "poi", elementType: "labels.text", stylers: [{ visibility: "on" }] }
         ]
-
-
       });
 
-      const markers = [
-        {
-          number: 1,
-          lat: 60.6223,
-          lng: 16.7836,
-          title: "Andakt",
-          description: "Dikten Andakt, invid nordvästra murresten av Sandvikens gamla kyrka, ingår i diktsamlingen ”Har ni flaggproblem?” (1970)."
-        },
-        {
-          number: 2,
-          lat: 60.6152,
-          lng: 16.7848,
-          title: "I åttan, där vevaxlarna...",
-          description: "Vid ånghammaren nedanför Sandviks gamla huvudkontor finns dikten I åttan, där vevaxlarna... ur ”Sotfragment” (1949)."
-        },
-        {
-          number: 3,
-          lat: 60.6160,
-          lng: 16.7815,
-          title: "Kärleksbrev",
-          description: "Vid norra sluttningen ner mot Dal-Britas damm, sitter dikten Kärleksbrev, ur diktsamlingen ”Livets starka smak” (1974)."
-        },
-        {
-          number: 4,
-          lat: 60.6169185,
-          lng: 16.7797732,
-          title: "Bandvalsaren",
-          description: "På gräsmattan, mitt emot entrén till Smedsgårdens museum, återfinns dikten Bandvalsaren, ur diktsamlingen ”Sotfragment” (1949)."
-        },
-        {
-          number: 5,
-          lat: 60.6150,
-          lng: 16.7760,
-          title: "Tvätterska",
-          description: "Dikten Tvätterska, ur diktsamlingen ”Molnskugga” (1955), finns att läsa i parken nära kanalen vid Barrsätragatsbron."
-        },
-        {
-          number: 6,
-          lat: 60.6190,
-          lng: 16.7740,
-          title: "Himlafrukost",
-          description: "Dikten Himlafrukost ur ”Livets starka smak (1974) finns på slaggstensmuren till vänster bakom restaurangen The Church."
-        },
-        {
-          number: 7,
-          lat: 60.6198,
-          lng: 16.7730,
-          title: "Sätt du fram ur sommarns nätta nyponskålar...",
-          description: "Vid stadshuset, och Smedsgatans norra ände, finner du dikten Sätt du fram ur sommarns nätta nyponskålar..., från diktsamlingen ”Läkebok, nedresa” (1993)."
-        },
-        {
-          number: 8,
-          lat: 60.6208395,
-          lng: 16.7802191,
-          title: "Anteckningar om arbetet",
-          description: "Anteckningar om arbetet ingår i diktsamlingen ”Livets starka smak” (1974). Den finner du på muren vid konsthallens entré."
-        }
-      ];
+      const bounds = new google.maps.LatLngBounds();
 
-      markers.forEach(m => {
+      // Skapa markörer
+      const markers = POEMS.map(p => {
         const marker = new google.maps.Marker({
           map,
-          position: { lat: m.lat, lng: m.lng },
-          label: String(m.number),
-          title: m.title
-        });
-
-        const infoWindow = new google.maps.InfoWindow({
-          content: `<strong>${m.title}</strong><br>${m.description}`
+          position: { lat: p.lat, lng: p.lng },
+          label: String(p.number),
+          title: p.title
         });
 
         marker.addListener("click", () => {
-          infoWindow.open(map, marker);
+          infoWindow.setContent(infoContent(p));
+          infoWindow.open({ map, anchor: marker, shouldFocus: false });
         });
+
+        bounds.extend(marker.getPosition());
+        return marker;
       });
-    }
+
+      // Auto-zoom till alla punkter
+      map.fitBounds(bounds);
+
+      // Valfri: max-zoom efter fitBounds (så man inte hamnar för nära)
+      const listener = google.maps.event.addListenerOnce(map, "bounds_changed", () => {
+        const maxZoom = 17;
+        if (map.getZoom() > maxZoom) map.setZoom(maxZoom);
+      });
+
 
     window.onload = function() {
       const script = document.createElement('script');
