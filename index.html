@@ -29,6 +29,7 @@
       const map = new google.maps.Map(document.getElementById("googleMap"), {
         center: { lat: 60.6189135, lng: 16.7788006 },
         zoom: 15,
+        clickableIcons: false,
         styles: [
           { featureType: "poi.business", stylers: [{ visibility: "off" }] },
           { featureType: "road", elementType: "labels", stylers: [{ visibility: "on" }] },
