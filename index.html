@@ -174,15 +174,16 @@
         if (map.getZoom() > maxZoom) map.setZoom(maxZoom);
       });
 
-
-    window.onload = function() {
-      const script = document.createElement('script');
-      script.src = "https://maps.googleapis.com/maps/api/js?key=";
-      script.async = true;
-      script.defer = true;
-      script.onload = initMap;
-      document.head.appendChild(script);
-    };
+      // Om du vill klustra markörer när listan växer:
+      // new markerClusterer.MarkerClusterer({ map, markers });
+    }
   </script>
+
+  <!-- Ladda Maps med callback och svensk språk/region -->
+  https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&callback=initMap&v=weekly&loading=async&language=sv&region=SE</script>
+
+  <!-- Valfritt: klustring när du får många punkter
+  https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js</script>
+  -->
 </body>
 </html>
