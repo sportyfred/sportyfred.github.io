@@ -261,8 +261,8 @@ const content = `
            <p> ${m.description}</p><br/>
              <a href="#" class="toggle-poem">Läs dikten</a>
     <div class="poem" style="max-height:0; overflow:hidden; transition:max-height .4s ease;">
-      <div style="white-space:pre-wrap;"><h2>${m.title}</h2>
-      ${m.poem}</div>
+      <div style="white-space:pre-wrap;">
+      <p>${m.poem}</p></div>
     </div>
             
           </div>
@@ -289,34 +289,7 @@ const content = `
     }
     
     
-      // Create walking route
-  const directionsService = new google.maps.DirectionsService();
-  const directionsRenderer = new google.maps.DirectionsRenderer({ suppressMarkers: true });
-  directionsRenderer.setMap(map);
-
-  const waypoints = [
-    {
-      location: new google.maps.LatLng(markers[1].lat, markers[1].lng),
-      stopover: true
-    }
-  ];
-
-  const request = {
-    origin: new google.maps.LatLng(markers[0].lat, markers[0].lng),
-    destination: new google.maps.LatLng(markers[2].lat, markers[2].lng),
-    waypoints: waypoints,
-    travelMode: google.maps.TravelMode.WALKING
-  };
-
-  directionsService.route(request, function (result, status) {
-    if (status === google.maps.DirectionsStatus.OK) {
-      directionsRenderer.setDirections(result);
-    } else {
-      console.error("Directions request failed due to " + status);
-    }
-  });
-}
-
+      
     
     document.addEventListener("click", (e) => {
   if (e.target.matches(".toggle-poem")) {
