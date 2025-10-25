@@ -255,15 +255,8 @@ Antasta den avsikten om du kan!`
           title: m.title
         });
 
-        // Förbättring #3: "Hitta hit" länk i InfoWindow
-        const gmmLink = `https://www.google.com/maps/search/?api=1&query=${m.lat},${m.lng}`;
-        const content = `
-          <div style="line-height:1.4;max-width:420px">
-            <strong>${m.number}. ${m.title}</strong><br/>
-            ${m.description}<br/><br/>
-            ${gmmLink}Hitta hit i Google Maps</a>
-          </div>
-        `;
+
+        
 
         marker.addListener("click", () => {
           infoWindow.setContent(content);
