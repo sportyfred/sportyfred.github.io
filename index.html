@@ -259,6 +259,10 @@ const content = `
           <div style="line-height:1.4;max-width:420px">
             <h1>${m.title}</h1><br/>
            <p> ${m.description}</p><br/>
+             <a href="#" class="toggle-poem">Läs dikten</a>
+    <div class="poem" style="max-height:0; overflow:hidden; transition:max-height .4s ease;">
+      <div style="white-space:pre-wrap;">${m.poem}</div>
+    </div>
             
           </div>
         `;
@@ -282,6 +286,22 @@ const content = `
         if (map.getZoom() > maxZoom) map.setZoom(maxZoom);
       });
     }
+    
+    document.addEventListener("click", (e) => {
+  if (e.target.matches(".toggle-poem")) {
+    e.preventDefault()
+    const poemDiv = e.target.nextElementSibling
+    const isOpen = poemDiv.style.maxHeight && poemDiv.style.maxHeight !== "0px"
+
+    if (isOpen) {
+      poemDiv.style.maxHeight = "0px"
+      e.target.textContent = "Läs dikten"
+    } else {
+      poemDiv.style.maxHeight = poemDiv.scrollHeight + "px"
+      e.target.textContent = "Dölj dikten"
+    }
+  }
+})
 
     window.onload = function() {
       const script = document.createElement('script');
