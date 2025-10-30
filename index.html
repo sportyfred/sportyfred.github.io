@@ -26,7 +26,7 @@ p {
 
     /* Behåller din tidigare stil för InfoWindow */
     .gm-style-iw {
-      max-width: min(480px, 92vw);
+      max-width: min(420px, 80vw);
 
     }
   
@@ -257,11 +257,7 @@ Antasta den avsikten om du kan!`
       // --- Förbättring #3: Auto-zoom till alla markörer ---
       const bounds = new google.maps.LatLngBounds();
 
-      const icon = {
-   
-    scaledSize: new google.maps.Size(150, 150), // scaled size
-   
-};
+ 
 
       markers.forEach(m => {
         const marker = new google.maps.Marker({
@@ -269,19 +265,19 @@ Antasta den avsikten om du kan!`
           position: { lat: m.lat, lng: m.lng },
           label: String(m.number),
           title: m.title,
-          icon: icon
+
         });
 
 const content = `
           <div>
             <h2>${m.title}</h2>
            <p> ${m.description}</p><br/>
-        
+       <a href="#" class="toggle-poem">Läs dikten</a>
     <div class="poem" style="max-height:0; overflow:hidden; transition:max-height .4s ease;">
       <div style="white-space:pre-wrap;">
       <p>${m.poem}</p></div>
     </div>
-      <p>   <a href="#" style="text-align: right;" class="toggle-poem">Läs dikten</a></p>
+     
             
           </div>
         `;
