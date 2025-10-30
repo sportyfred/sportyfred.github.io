@@ -273,11 +273,25 @@ Antasta den avsikten om du kan!`
  
 
       markers.forEach(m => {
-        const marker = new google.maps.Marker({
-          map,
-          position: { lat: m.lat, lng: m.lng },
-          label: String(m.number),
-          title: m.title,
+      const pin = new PinElement({
+            
+            glyphText: `${m + 1}`,
+            scale: 1.5,
+        });
+        
+        const marker = new AdvancedMarkerElement({
+            
+            map,
+            title: `${m + 1}. ${m.title}`,
+            content: pin.element,
+            
+        
+        
+        
+          
+          position: { lat: m.lat, lng: m.lng }
+          
+          
 
         });
 
