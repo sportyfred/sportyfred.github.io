@@ -56,6 +56,7 @@ p {
       const map = new google.maps.Map(document.getElementById("googleMap"), {
         center: { lat: 60.6189135, lng: 16.7788006 },
         zoom: 15,
+        mapId: "DEMO_MAP_ID",
         clickableIcons: false,
         styles: [
           { featureType: "poi.business", stylers: [{ visibility: "off" }] },
@@ -342,7 +343,7 @@ Antasta den avsikten om du kan!`
     window.onload = function() {
       const script = document.createElement('script');
       // Förbättring #3: språk/region -> svenska/Sverige
-      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDg3KLnpRbEjHD0Da-SidW12jU-Btr7fqM&language=sv&region=SE";
+      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDg3KLnpRbEjHD0Da-SidW12jU-Btr7fqM&v=beta&language=sv&region=SE";
       script.async = true;
       script.defer = true;
       script.onload = initMap;
