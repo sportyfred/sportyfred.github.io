@@ -259,12 +259,19 @@ Antasta den avsikten om du kan!`
       // --- Förbättring #3: Auto-zoom till alla markörer ---
       const bounds = new google.maps.LatLngBounds();
 
+      const icon = {
+   
+    scaledSize: new google.maps.Size(150, 150), // scaled size
+   
+};
+
       markers.forEach(m => {
         const marker = new google.maps.Marker({
           map,
           position: { lat: m.lat, lng: m.lng },
           label: String(m.number),
-          title: m.title
+          title: m.title,
+          icon: icon
         });
 
 const content = `
