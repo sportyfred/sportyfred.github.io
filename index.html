@@ -5,19 +5,31 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>STADENS POESI</title>
   <style>
+  
+  * { 
+  --font-size: calc((var(--pixels)/16) * 1rem);
+  font-size: var(--font-size); /* To use on an HTML element */
+}
+
+h1 {
+  --pixels: 48; /* Equals to 48px */
+  font-size: var(--font-size);
+}
+
+
+h2 {
+  --pixels: 24; /* Equals to 24px */
+  font-size: var(--font-size);
+}
     html, body {
       font-size: 1.1rem;
       height: 100%;
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      h1 {
-  font-size: 1.8rem;
-}
-h2 {
-  font-size: 1.5rem;
-}
+      
 p {
-  font-size: 1.2rem;
+    --pixels: 16; /* Equals to 24px */
+  font-size: var(--font-size);
 }
     }
     #googleMap {
