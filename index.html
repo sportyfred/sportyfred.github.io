@@ -29,6 +29,9 @@ p {
       max-width: min(480px, 92vw);
 
     }
+    .toogle-poem {
+        text-align: right;
+    }
   </style>
 </head>
 <body>
@@ -268,11 +271,12 @@ const content = `
           <div>
             <h2>${m.title}</h2>
            <p> ${m.description}</p><br/>
-             <a href="#" class="toggle-poem">Läs dikten</a>
+        
     <div class="poem" style="max-height:0; overflow:hidden; transition:max-height .4s ease;">
       <div style="white-space:pre-wrap;">
       <p>${m.poem}</p></div>
     </div>
+      <p>   <a href="#" class="toggle-poem">Läs dikten</a></p>
             
           </div>
         `;
