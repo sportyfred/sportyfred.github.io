@@ -273,13 +273,13 @@ Antasta den avsikten om du kan!`
  
 
       markers.forEach(m => {
-      const pin = new PinElement({
+      const pin = new google.maps.PinElement({
             
             glyphText: `${m + 1}`,
             scale: 1.5,
         });
         
-        const marker = new AdvancedMarkerElement({
+        const marker = new google.maps.AdvancedMarkerElement({
             
             map,
             title: `${m + 1}. ${m.title}`,
