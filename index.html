@@ -60,51 +60,70 @@ p {
         zoom: 15,
         clickableIcons: false,
         styles: [
-          {
-  featureType: "building",
-  elementType: "geometry",
-  stylers: [{ color: "#5D4037" }] // Dark brown
-},
-{
-  featureType: "landscape.man_made",
-  elementType: "geometry",
-  stylers: [{ color: "#5D4037" }] // Dark brown for man-made structures
-},
-{
-  featureType: "administrative.land_parcel",
-  elementType: "geometry",
-  stylers: [{ color: "#e6dfd3" }] // Optional: dark brown for parcels
-}
-,
-          {
-      featureType: "all",
-      elementType: "geometry",
-      stylers: [{ color: "#e6dfd3" }] // Beige for land/buildings
-    },
-    {
-      featureType: "water",
-      elementType: "geometry",
-      stylers: [{ color: "#a0c8f0" }] // Blue for waterways
-    },
-    {
-      featureType: "park",
-      elementType: "geometry",
-      stylers: [{ color: "#c5e1a5" }] // Green for parks
-    },
-    {
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [{ color: "#ffffff" }] // Light roads
-    },
+  {
+    featureType: "landscape.man_made",
+    elementType: "geometry",
+    stylers: [{ color: "#5D4037" }]
+  },
+  {
+    featureType: "poi",
+    elementType: "geometry",
+    stylers: [{ color: "#5D4037" }]
+  },
+  {
+    featureType: "poi",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#3E2723" }]
+  },
+  {
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [{ color: "#a0c8f0" }]
+  },
+  {
+    featureType: "park",
+    elementType: "geometry",
+    stylers: [{ color: "#c5e1a5" }]
+  },
+  {
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [{ color: "#ffffff" }]
+  },
+  {
+    featureType: "poi.business",
+    stylers: [{ visibility: "off" }]
+  },
+  {
+    featureType: "road",
+    elementType: "labels",
+    stylers: [{ visibility: "on" }]
+  },
+  {
+    featureType: "poi.place_of_worship",
+    stylers: [{ visibility: "on" }]
+  },
+  {
+    featureType: "poi.school",
+    stylers: [{ visibility: "on" }]
+  },
+  {
+    featureType: "poi.government",
+    stylers: [{ visibility: "on" }]
+  },
+  {
+    featureType: "poi.medical",
+    stylers: [{ visibility: "on" }]
+  },
+  {
+    featureType: "poi",
+    elementType: "labels.text",
+    stylers: [{ visibility: "on" }]
+  }
+]
 
-          { featureType: "poi.business", stylers: [{ visibility: "off" }] },
-          { featureType: "road", elementType: "labels", stylers: [{ visibility: "on" }] },
-          { featureType: "poi.place_of_worship", stylers: [{ visibility: "on" }] },
-          { featureType: "poi.school", stylers: [{ visibility: "on" }] },
-          { featureType: "poi.government", stylers: [{ visibility: "on" }] },
-          { featureType: "poi.medical", stylers: [{ visibility: "on" }] },
-          { featureType: "poi", elementType: "labels.text", stylers: [{ visibility: "on" }] }
-        ]
+    
+          
       });
 
       const markers = [
