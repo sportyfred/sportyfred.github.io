@@ -61,6 +61,22 @@ p {
         clickableIcons: false,
         styles: [
           {
+  featureType: "building",
+  elementType: "geometry",
+  stylers: [{ color: "#5D4037" }] // Dark brown
+},
+{
+  featureType: "landscape.man_made",
+  elementType: "geometry",
+  stylers: [{ color: "#5D4037" }] // Dark brown for man-made structures
+},
+{
+  featureType: "administrative.land_parcel",
+  elementType: "geometry",
+  stylers: [{ color: "#e6dfd3" }] // Optional: dark brown for parcels
+}
+,
+          {
       featureType: "all",
       elementType: "geometry",
       stylers: [{ color: "#e6dfd3" }] // Beige for land/buildings
