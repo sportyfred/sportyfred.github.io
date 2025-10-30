@@ -60,6 +60,27 @@ p {
         zoom: 15,
         clickableIcons: false,
         styles: [
+          {
+      featureType: "all",
+      elementType: "geometry",
+      stylers: [{ color: "#e6dfd3" }] // Beige for land/buildings
+    },
+    {
+      featureType: "water",
+      elementType: "geometry",
+      stylers: [{ color: "#a0c8f0" }] // Blue for waterways
+    },
+    {
+      featureType: "park",
+      elementType: "geometry",
+      stylers: [{ color: "#c5e1a5" }] // Green for parks
+    },
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [{ color: "#ffffff" }] // Light roads
+    },
+
           { featureType: "poi.business", stylers: [{ visibility: "off" }] },
           { featureType: "road", elementType: "labels", stylers: [{ visibility: "on" }] },
           { featureType: "poi.place_of_worship", stylers: [{ visibility: "on" }] },
