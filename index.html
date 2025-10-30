@@ -277,29 +277,24 @@ Antasta den avsikten om du kan!`
  
 
       markers.forEach(m => {
-      
-          
-          const marker = new google.maps.Marker({
-  map,
-  position: { lat: m.lat, lng: m.lng },
-  label: {
-    text: String(m.number),
-    color: "white",
-    fontSize: "14px",
-    fontWeight: "bold",
-  },
-  icon: {
-    path: google.maps.SymbolPath.CIRCLE,
-    fillColor: "#007BFF",
-    fillOpacity: 1,
-    scale: 10,
-    strokeColor: "white",
-    strokeWeight: 2,
-  },
-});
-          
-
-        });
+        const marker = new google.maps.Marker({
+          map,
+          position: { lat: m.lat, lng: m.lng },
+          label: {
+            text: String(m.number),
+            color: "white",
+            fontSize: "14px",
+            fontWeight: "bold",
+          },
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: "#007BFF",
+            fillOpacity: 1,
+            scale: 10,
+            strokeColor: "white",
+            strokeWeight: 2,
+          },
+        })
 
 const content = `
           <div>
