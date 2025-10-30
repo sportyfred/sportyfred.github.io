@@ -276,52 +276,39 @@ Antasta den avsikten om du kan!`
 
  
 
-      markers.forEach(m => {
-      const pin = new google.maps.PinElement({
-            
-            glyphText: `${m + 1}`,
-            scale: 1.5,
-        });
-        
-        const marker = new google.maps.AdvancedMarkerElement({
-            
-            map,
-            title: `${m + 1}. ${m.title}`,
-            content: pin.element,
-            
-        
-        
-        
-          
-          position: { lat: m.lat, lng: m.lng }
-          
-          
+    markers.forEach((m, i) => {
+  const pin = new google.maps.marker.PinElement({
+    glyph: `${i + 1}`,
+    scale: 1.5,
+  });
 
-        });
+  const marker = new google.maps.marker.AdvancedMarkerElement({
+    map,
+    position: { lat: m.lat, lng: m.lng },
+    title: `${i + 1}. ${m.title}`,
+    content: pin.element,
+  });
 
-const content = `
-          <div>
-            <h2>${m.title}</h2>
-           <p> ${m.description}</p><br/>
-       <a href="#" class="toggle-poem">Läs dikten</a>
-    <div class="poem" style="max-height:0; overflow:hidden; transition:max-height .4s ease;">
-      <div style="white-space:pre-wrap;">
-      <p>${m.poem}</p></div>
+  const content = `
+    <div>
+      <h2>${m.title}</h2>
+      <p>${m.description}</p><br/>
+      <a href="#" class="toggle-poem">Läs dikten</a>
+      <div class="poem" style="max-height:0; overflow:hidden; transition:max-height .4s ease;">
+        <div style="white-space:pre-wrap;">
+          <p>${m.poem}</p>
+        </div>
+      </div>
     </div>
-     
-            
-          </div>
-        `;
+  `;
 
-        
+  marker.addListener("click", () => {
+    infoWindow.setContent(content);
+    infoWindow.open(map, marker);
+  });
 
-        marker.addListener("click", () => {
-          infoWindow.setContent(content);
-          infoWindow.open(map, marker); // endast en öppen åt gången
-        });
-
-        bounds.extend(marker.getPosition());
-      });
+  bounds.extend(marker.position);
+});
 
       // Auto-zoom till alla punkter
       map.fitBounds(bounds);
