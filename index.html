@@ -56,7 +56,6 @@ p {
       const map = new google.maps.Map(document.getElementById("googleMap"), {
         center: { lat: 60.6189135, lng: 16.7788006 },
         zoom: 15,
-        mapId: "DEMO_MAP_ID",
         clickableIcons: false,
         styles: [
           { featureType: "poi.business", stylers: [{ visibility: "off" }] },
@@ -277,39 +276,54 @@ Antasta den avsikten om du kan!`
 
  
 
-    markers.forEach((m, i) => {
-  const pin = new google.maps.marker.PinElement({
-    glyph: `${i + 1}`,
-    scale: 1.5,
-  });
-
-  const marker = new google.maps.marker.AdvancedMarkerElement({
-    map,
-    position: { lat: m.lat, lng: m.lng },
-    title: `${i + 1}. ${m.title}`,
-    content: pin.element,
-  });
-
-  const content = `
-    <div>
-      <h2>${m.title}</h2>
-      <p>${m.description}</p><br/>
-      <a href="#" class="toggle-poem">Läs dikten</a>
-      <div class="poem" style="max-height:0; overflow:hidden; transition:max-height .4s ease;">
-        <div style="white-space:pre-wrap;">
-          <p>${m.poem}</p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  marker.addListener("click", () => {
-    infoWindow.setContent(content);
-    infoWindow.open(map, marker);
-  });
-
-  bounds.extend(marker.position);
+      markers.forEach(m => {
+      
+          
+          const marker = new google.maps.Marker({
+  map,
+  position: { lat: m.lat, lng: m.lng },
+  label: {
+    text: `${m + 1}`,
+    color: "white",
+    fontSize: "14px",
+    fontWeight: "bold",
+  },
+  icon: {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: "#007BFF",
+    fillOpacity: 1,
+    scale: 10,
+    strokeColor: "white",
+    strokeWeight: 2,
+  },
 });
+          
+
+        });
+
+const content = `
+          <div>
+            <h2>${m.title}</h2>
+           <p> ${m.description}</p><br/>
+       <a href="#" class="toggle-poem">Läs dikten</a>
+    <div class="poem" style="max-height:0; overflow:hidden; transition:max-height .4s ease;">
+      <div style="white-space:pre-wrap;">
+      <p>${m.poem}</p></div>
+    </div>
+     
+            
+          </div>
+        `;
+
+        
+
+        marker.addListener("click", () => {
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker); // endast en öppen åt gången
+        });
+
+        bounds.extend(marker.getPosition());
+      });
 
       // Auto-zoom till alla punkter
       map.fitBounds(bounds);
@@ -343,7 +357,7 @@ Antasta den avsikten om du kan!`
     window.onload = function() {
       const script = document.createElement('script');
       // Förbättring #3: språk/region -> svenska/Sverige
-      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDg3KLnpRbEjHD0Da-SidW12jU-Btr7fqM&v=beta&language=sv&region=SE";
+      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDg3KLnpRbEjHD0Da-SidW12jU-Btr7fqM&language=sv&region=SE";
       script.async = true;
       script.defer = true;
       script.onload = initMap;
