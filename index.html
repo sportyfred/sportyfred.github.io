@@ -367,9 +367,10 @@ const content = `
       
       </div>  
     </div>
-       <a href="#" class="toggle-poem">Läs dikten</a>
+        <a href="#" class="toggle-poem">Läs dikten</a>
    
-            
+       
+        
           </div>
         `;
 
@@ -399,7 +400,7 @@ const content = `
     document.addEventListener("click", (e) => {
   if (e.target.matches(".toggle-poem")) {
     e.preventDefault()
-    const poemDiv = e.target.nextElementSibling
+    const poemDiv = e.target.previousElementSibling
     const isOpen = poemDiv.style.maxHeight && poemDiv.style.maxHeight !== "0px"
 
     if (isOpen) {
