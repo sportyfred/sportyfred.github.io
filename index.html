@@ -1,118 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
- <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet'>
+  https://fonts.googleapis.com/css?family=Libre+Baskerville
+  <title>STADENS POESI - en vandring till åtta dikter av STIG SJÖDIN</title>
 
-   <title>STADENS POESI - en vandring till åtta dikter
-av
-STIG SJÖDIN
-    
-  </title>
   <style>
-  
-
-
-
-
     :root {
       --base-font-size: 16px;
       --font-family-sans: Arial, Helvetica, sans-serif;
       --font-family-serif: "Libre Baskerville", Georgia, serif;
-      --accent-blue: #1a73e8;
     }
-
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: var(--font-family-sans);
-      font-size: var(--base-font-size);
-      line-height: 1.5;
-      color: #222;
-    }
-
-    h1 {
-      font-size: clamp(1.8rem, 2.5vw + 1rem, 3rem);
-      margin: 0.5rem 0;
-    }
-    h2 {
-      font-size: clamp(1.25rem, 1.2vw + 0.8rem, 1.75rem);
-      margin: 0.25rem 0 0.5rem 0;
-    }
+    html, body { height: 100%; margin: 0; font-family: var(--font-family-sans); font-size: var(--base-font-size); line-height: 1.5; color: #222; }
+    h2 { font-size: clamp(1.25rem, 1.2vw + 0.8rem, 1.75rem); margin: 0.25rem 0 0.5rem 0; }
     p { font-size: 1rem; margin: 0.4rem 0; }
+    #googleMap { height: 100%; width: 100%; }
+    .gm-style-iw { max-width: min(420px, 80vw); }
 
-    #googleMap {
-      height: 100%;
-      width: 100%;
-    }
+    .poem { font-family: var(--font-family-serif); white-space: pre-wrap; margin-top: 0.5rem; }
+    .poem-wrap { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+    .toggle-poem, .route-to { display: inline-block; margin-top: 0.5rem; color: #1565c0; text-decoration: none; font-weight: 600; }
+    .toggle-poem:hover, .route-to:hover { text-decoration: underline; }
 
-    .gm-style-iw {
-      max-width: min(420px, 80vw);
-    }
-
-    .poem {
-      font-family: var(--font-family-serif);
-      white-space: pre-wrap;
-      margin-top: 0.5rem;
-    }
-    .poem-wrap {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .4s ease;
-    }
-
-    .toggle-poem, .route-to {
-      display: inline-block;
-      margin-top: 0.5rem;
-      color: #1565c0;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .toggle-poem:focus, .toggle-poem:hover,
-    .route-to:focus, .route-to:hover {
-      text-decoration: underline;
-    }
-
-    /* Enkel kontroll-knapp på kartan */
     .map-control {
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding: 6px 10px;
-      font-size: 0.95rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-      cursor: pointer;
-      user-select: none;
+      background: #fff; border: 1px solid #ccc; border-radius: 4px;
+      padding: 6px 10px; font-size: 0.95rem; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      cursor: pointer; user-select: none;
     }
-    .map-control:hover {
-      background: #f7f7f7;
-    }
+    .map-control:hover { background: #f7f7f7; }
 
     @media (prefers-color-scheme: dark) {
       html, body { color: #eee; background: #111; }
       .map-control { background: #222; color: #eee; border-color: #444; }
     }
-
   </style>
 </head>
 <body>
- <div id="googleMap"></div>
-  <script src="dikter.js"></script>
+  <div id="googleMap"></div>
+
   <script>
-   
-let map;
-    let infoWindow;
-    let bounds;
-
-    // Enhetsposition
-    let userPos = null;
-    let userMarker = null;
-    let accuracyCircle = null;
-
-    // Vägbeskrivning (gång)
-    let directionsService = null;
-    let directionsRenderer = null;
+    let map, infoWindow, bounds;
+    let userPos = null, userMarker = null, accuracyCircle = null;
+    let directionsService = null, directionsRenderer = null;
 
     function initMap() {
       map = new google.maps.Map(document.getElementById("googleMap"), {
@@ -144,67 +75,67 @@ let map;
         map,
         suppressMarkers: false,
         preserveViewport: false,
-        polylineOptions: { strokeColor: "#1976d2", strokeWeight: 5, strokeOpacity: 0.8 }
+        polylineOptions: { strokeColor: "#1976d2", strokeWeight: 5, strokeOpacity: 0.85 }
       });
 
+      const markers = [
+        {
+          number: 1,
+          lat: 60.6223,
+          lng: 16.7836,
+          title: "Andakt",
+          description:
+            "Dikten Andakt, invid nordvästra murresten av Sandvikens gamla kyrka, ingår i diktsamlingen ”Har ni flaggproblem?” (1970).",
+          poem: `…` // (behåll din dikttext här)
+        },
+        {
+          number: 2,
+          lat: 60.6152,
+          lng: 16.7848,
+          title: "I åttan, där vevaxlarna...",
+          description:
+            "Vid ånghammaren nedanför Sandviks gamla huvudkontor finns dikten I åttan, där vevaxlarna... ur ”Sotfragment” (1949).",
+          poem: `…` // (behåll din dikttext här)
+        }
+      ];
 
-     
+      markers.forEach(m => {
+        const marker = new google.maps.Marker({
+          map,
+          position: { lat: m.lat, lng: m.lng },
+          label: { text: String(m.number), color: "black", fontSize: "22px", fontWeight: "900", fontFamily: "Libre Baskerville" },
+          icon: { path: google.maps.SymbolPath.CIRCLE, fillColor: "red", fillOpacity: 1, scale: 15, strokeColor: "black", strokeWeight: 0 },
+          title: m.title
+        });
 
-  
-      markers.forEach(m => createMarker(m));
+        const content = `
+          <div>
+            <h2>${m.title}</h2>
+            <p>${m.description}</p>
+            <div class="poem-wrap">
+              <div class="poem">${escapeHtml(m.poem)}</div>
+            </div>
+            #Läs dikten</a>
+            <br/>
+            <a href="#" class="route-to" data-lat="${m.lat      `;
 
-      // Auto-zoom till alla punkter (inkl. userpos när den kommer)
+        marker.addListener("click", () => {
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker);
+          google.maps.event.addListenerOnce(infoWindow, "domready", () => attachIWHandlers());
+        });
+
+        bounds.extend(marker.getPosition());
+      });
+
       map.fitBounds(bounds);
       google.maps.event.addListenerOnce(map, "bounds_changed", () => {
         const maxZoom = 17;
         if (map.getZoom() > maxZoom) map.setZoom(maxZoom);
       });
 
-      // Initiera enhetsposition
       enableGeolocation();
-
-      // Lägg till kontroll för att rensa vägbeskrivning
       addClearRouteControl();
-    }
-
-    function createMarker(m) {
-      const marker = new google.maps.Marker({
-        map,
-        position: { lat: m.lat, lng: m.lng },
-        label: {
-          text: String(m.number),
-          color: "black",
-          fontSize: "22px",
-          fontWeight: "900",
-          fontFamily: "Libre Baskerville",
-        },
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          fillColor: "red",
-          fillOpacity: 1,
-          scale: 15,
-          strokeColor: "black",
-          strokeWeight: 0,
-        },
-        title: m.title
-      });
-
-      const content = `
-        <div>
-          <h2>${m.title}</h2>
-          <p>${m.description}</p>
-          <div class="poem-wrap">
-            <div class="poem">${escapeHtml(m.poem)}</div>
-          </div>
-          #Läs dikten</a>
-          <br/>
-          <a href="#" class="route-to" data-lat="${m.lat}" data-lng="${m.lng}" titleer("click", () => {
-        infoWindow.setContent(content);
-        infoWindow.open(map, marker);
-        google.maps.event.addListenerOnce(infoWindow, "domready", () => attachIWHandlers());
-      });
-
-      bounds.extend(marker.getPosition());
     }
 
     function escapeHtml(str) {
@@ -220,17 +151,16 @@ let map;
       const iw = document.querySelector(".gm-style-iw");
       if (!iw) return;
 
-      const toggle = iw.querySelector(".toggle-poem");
       const wrap = iw.querySelector(".poem-wrap");
-      if (toggle && wrap) {
+      const toggle = iw.querySelector(".toggle-poem");
+      if (wrap && toggle) {
         wrap.style.maxHeight = "0px";
         toggle.textContent = "Läs dikten";
         toggle.setAttribute("aria-expanded", "false");
-
         toggle.addEventListener("click", (e) => {
           e.preventDefault();
-          const isOpen = wrap.style.maxHeight && wrap.style.maxHeight !== "0px";
-          if (isOpen) {
+          const open = wrap.style.maxHeight && wrap.style.maxHeight !== "0px";
+          if (open) {
             wrap.style.maxHeight = "0px";
             toggle.textContent = "Läs dikten";
             toggle.setAttribute("aria-expanded", "false");
@@ -246,38 +176,27 @@ let map;
       if (routeBtn) {
         routeBtn.addEventListener("click", (e) => {
           e.preventDefault();
-          const lat = parseFloat(routeBtn.dataset.lat);
-          const lng = parseFloat(routeBtn.dataset.lng);
-          routeToDestination({ lat, lng });
+          routeToDestination({
+            lat: parseFloat(routeBtn.dataset.lat),
+            lng: parseFloat(routeBtn.dataset.lng)
+          });
         });
       }
     }
 
     function enableGeolocation() {
       if (!navigator.geolocation) {
-        console.warn("Geolokalisering stöds inte av denna webbläsare.");
+        console.warn("Geolokalisering stöds inte i denna webbläsare.");
         return;
       }
-
-      // Första positionen
       navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setUserPosition(pos);
-        },
-        (err) => {
-          console.warn("Kunde inte hämta position:", err.message);
-        },
+        setUserPosition,
+        err => console.warn("Kunde inte hämta position:", err.message),
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
-
-      // Live-uppdatering
       navigator.geolocation.watchPosition(
-        (pos) => {
-          setUserPosition(pos, true);
-        },
-        (err) => {
-          console.warn("WatchPosition-fel:", err.message);
-        },
+        pos => setUserPosition(pos, true),
+        err => console.warn("WatchPosition-fel:", err.message),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 5000 }
       );
     }
@@ -297,7 +216,7 @@ let map;
             fillOpacity: 1,
             scale: 8,
             strokeColor: "white",
-            strokeWeight: 2,
+            strokeWeight: 2
           },
           zIndex: 999
         });
@@ -314,9 +233,9 @@ let map;
           zIndex: 998
         });
 
-        // Utöka bounds första gången
         bounds.extend(userMarker.getPosition());
         map.fitBounds(bounds);
+        if (map.getZoom() > 17) map.setZoom(17);
       } else {
         userMarker.setPosition(userPos);
         accuracyCircle.setCenter(userPos);
@@ -326,26 +245,21 @@ let map;
 
     function routeToDestination(dest) {
       if (!userPos) {
-        alert("Din position är inte tillgänglig än. Tillåt platsåtkomst, och försök igen.");
+        alert("Din position är inte tillgänglig ännu. Tillåt platsåtkomst och försök igen.");
         return;
       }
-
-      const request = {
+      const req = {
         origin: new google.maps.LatLng(userPos.lat, userPos.lng),
         destination: new google.maps.LatLng(dest.lat, dest.lng),
         travelMode: google.maps.TravelMode.WALKING,
         provideRouteAlternatives: false
       };
-
-      directionsService.route(request, (result, status) => {
+      directionsService.route(req, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
+          directionsRenderer.setMap(map);
           directionsRenderer.setDirections(result);
-          // Passa på att stänga diktrutan (valfritt)
-          // infoWindow.close();
         } else {
           console.warn("Directions misslyckades:", status);
-          alert("Kunde inte hämta vägbeskrivning. Testa igen, eller öppna i Google Maps.");
-          // Fallback: öppna extern Google Maps vägbeskrivning
           const url = `https://www.google.com/maps/dir/?api=1&origin=${userPos.lat},${userPos.lng}&destination=${dest.lat},${dest.lng}&travelmode=walking`;
           window.open(url, "_blank");
         }
@@ -353,29 +267,26 @@ let map;
     }
 
     function addClearRouteControl() {
-      const controlDiv = document.createElement("div");
-      controlDiv.className = "map-control";
-      controlDiv.textContent = "Rensa vägbeskrivning";
-      controlDiv.title = "Ta bort ritad gångväg";
-
-      controlDiv.addEventListener("click", () => {
+      const ctrl = document.createElement("div");
+      ctrl.className = "map-control";
+      ctrl.textContent = "Rensa vägbeskrivning";
+      ctrl.title = "Ta bort ritad gångväg";
+      ctrl.addEventListener("click", () => {
         directionsRenderer.setMap(null);
         directionsRenderer = new google.maps.DirectionsRenderer({
           map,
           suppressMarkers: false,
           preserveViewport: false,
-          polylineOptions: { strokeColor: "#1976d2", strokeWeight: 5, strokeOpacity: 0.8 }
+          polylineOptions: { strokeColor: "#1976d2", strokeWeight: 5, strokeOpacity: 0.85 }
         });
       });
-
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(controlDiv);
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(ctrl);
     }
 
-
+    // Ladda Maps API
     window.onload = function() {
       const script = document.createElement('script');
-      // Förbättring #3: språk/region -> svenska/Sverige
-      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDg3KLnpRbEjHD0Da-SidW12jU-Btr7fqM&language=sv&region=SE";
+      script.src = "https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&language=sv&region=SE";
       script.async = true;
       script.defer = true;
       script.onload = initMap;
