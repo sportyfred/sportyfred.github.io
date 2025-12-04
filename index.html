@@ -40,7 +40,7 @@
 </head>
 <body>
   <div id="googleMap"></div>
-
+<script src="dikter.js"></script>
   <script>
     let map, infoWindow, bounds;
     let userPos = null, userMarker = null, accuracyCircle = null;
@@ -79,27 +79,8 @@
         polylineOptions: { strokeColor: "#1976d2", strokeWeight: 5, strokeOpacity: 0.85 }
       });
 
-      const markers = [
-        {
-          number: 1,
-          lat: 60.6223,
-          lng: 16.7836,
-          title: "Andakt",
-          description:
-            "Dikten Andakt, invid nordvästra murresten av Sandvikens gamla kyrka, ingår i diktsamlingen ”Har ni flaggproblem?” (1970).",
-          poem: `…` // (behåll din dikttext här)
-        },
-        {
-          number: 2,
-          lat: 60.6152,
-          lng: 16.7848,
-          title: "I åttan, där vevaxlarna...",
-          description:
-            "Vid ånghammaren nedanför Sandviks gamla huvudkontor finns dikten I åttan, där vevaxlarna... ur ”Sotfragment” (1949).",
-          poem: `…` // (behåll din dikttext här)
-        }
-      ];
-
+      
+        
       markers.forEach(m => {
         const marker = new google.maps.Marker({
           map,
