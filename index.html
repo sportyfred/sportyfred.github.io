@@ -90,17 +90,24 @@
           title: m.title
         });
 
+
 const content = `
   <div>
     <h2>${m.title}</h2>
     <p>${m.description}</p>
+
     <div class="poem-wrap">
       <div class="poem">${escapeHtml(m.poem)}</div>
     </div>
+
     #Läs dikten</a>
     <br/>
-    <a href="#" class="route-to" datav>
+    #
+      Vägbeskrivning (gång)
+    </a>
+  </div>
 `;
+
 
         marker.addListener("click", () => {
           infoWindow.setContent(content);
@@ -121,14 +128,16 @@ const content = `
       addClearRouteControl();
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
-    }
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
 
     function attachIWHandlers() {
       const iw = document.querySelector(".gm-style-iw");
