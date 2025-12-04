@@ -91,89 +91,89 @@
         });
 
 
-const content = `
-  <div>
-    <h2>${m.title}</h2>
-    <p>${m.description}</p>
-
-    <div class="poem-wrap">
-      <div class="poem">${escapeHtml(m.poem)}</div>
-    </div>
-
-    #Läs dikten</a>
-    <br/>
-    #
-      Vägbeskrivning (gång)
-    </a>
-  </div>
-`;
-
+        const content = `
+          <div>
+            <h2>${m.title}</h2>
+            <p>${m.description}</p>
+            <div class="poem-wrap">
+              <div class="poem">${escapeHtml(m.poem)}</div>
+            </div>
+            #Läs dikten</a>
+            <br/>
+            #
+              Vägbeskrivning (gång)
+            </a>
+          </div>
+        `;
 
         marker.addListener("click", () => {
           infoWindow.setContent(content);
           infoWindow.open(map, marker);
-          google.maps.event.addListenerOnce(infoWindow, "domready", () => attachIWHandlers());
+
+          // Koppla handlers när InfoWindow-DOM är redo
+          google.maps.event.addListenerOnce(infoWindow, "domready", () => {
+            const iw = document.querySelector(".gm-style-iw");
+            if (!iw) return;
+
+            // Toggle "Läs/Dölj"
+            const wrap = iw.querySelector(".poem-wrap");
+            const toggle = iw.querySelector(".toggle-poem");
+            if (wrap && toggle) {
+              wrap.style.maxHeight = "0px";
+              toggle.textContent = "Läs dikten";
+              toggle.setAttribute("aria-expanded", "false");
+
+              toggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                const isOpen = wrap.style.maxHeight && wrap.style.maxHeight !== "0px";
+                if (isOpen) {
+                  wrap.style.maxHeight = "0px";
+                  toggle.textContent = "Läs dikten";
+                  toggle.setAttribute("aria-expanded", "false");
+                } else {
+                  wrap.style.maxHeight = wrap.scrollHeight + "px";
+                  toggle.textContent = "Dölj dikten";
+                  toggle.setAttribute("aria-expanded", "true");
+                }
+              });
+            }
+
+            // Vägbeskrivning (gång)
+            const routeBtn = iw.querySelector(".route-to");
+            if (routeBtn) {
+              routeBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                const lat = parseFloat(routeBtn.dataset.lat);
+                const lng = parseFloat(routeBtn.dataset.lng);
+                routeToDestination({ lat, lng });
+              });
+            }
+          });
         });
 
         bounds.extend(marker.getPosition());
       });
 
+      // Auto-zoom till alla punkter
       map.fitBounds(bounds);
       google.maps.event.addListenerOnce(map, "bounds_changed", () => {
         const maxZoom = 17;
         if (map.getZoom() > maxZoom) map.setZoom(maxZoom);
       });
 
+      // Geolokalisering + kontroll
       enableGeolocation();
       addClearRouteControl();
     }
 
-
-function escapeHtml(str) {
-  return String(str)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
-}
-
-
-    function attachIWHandlers() {
-      const iw = document.querySelector(".gm-style-iw");
-      if (!iw) return;
-
-      const wrap = iw.querySelector(".poem-wrap");
-      const toggle = iw.querySelector(".toggle-poem");
-      if (wrap && toggle) {
-        wrap.style.maxHeight = "0px";
-        toggle.textContent = "Läs dikten";
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.addEventListener("click", (e) => {
-          e.preventDefault();
-          const open = wrap.style.maxHeight && wrap.style.maxHeight !== "0px";
-          if (open) {
-            wrap.style.maxHeight = "0px";
-            toggle.textContent = "Läs dikten";
-            toggle.setAttribute("aria-expanded", "false");
-          } else {
-            wrap.style.maxHeight = wrap.scrollHeight + "px";
-            toggle.textContent = "Dölj dikten";
-            toggle.setAttribute("aria-expanded", "true");
-          }
-        });
-      }
-
-      const routeBtn = iw.querySelector(".route-to");
-      if (routeBtn) {
-        routeBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          routeToDestination({
-            lat: parseFloat(routeBtn.dataset.lat),
-            lng: parseFloat(routeBtn.dataset.lng)
-          });
-        });
-      }
+    // --- Hjälpfunktioner ---
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
     }
 
     function enableGeolocation() {
@@ -181,11 +181,13 @@ function escapeHtml(str) {
         console.warn("Geolokalisering stöds inte i denna webbläsare.");
         return;
       }
+      // initial
       navigator.geolocation.getCurrentPosition(
         setUserPosition,
         err => console.warn("Kunde inte hämta position:", err.message),
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
+      // live-uppdatering
       navigator.geolocation.watchPosition(
         pos => setUserPosition(pos, true),
         err => console.warn("WatchPosition-fel:", err.message),
@@ -274,6 +276,7 @@ function escapeHtml(str) {
       });
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(ctrl);
     }
+
 
     // Ladda Maps API
     window.onload = function() {
