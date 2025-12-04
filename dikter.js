@@ -1,0 +1,198 @@
+[
+  {
+    number: 1,
+    lat: 60.6223,
+    lng: 16.7836,
+    title: "Andakt",
+    description:
+      "Dikten Andakt, invid nordvästra murresten av Sandvikens gamla kyrka, ingår i diktsamlingen ”Har ni flaggproblem?” (1970).",
+    poem: `Den gamle ställer velocipeden mot slaggstensfoten,
+det enda som är kvar av den första kyrkan.
+Sen går han in under valv som når in i himlen.
+Jag stjäl mig till hastiga tittar.
+Insjunken gammelmansmun har han, disig blick,
+ryggen krummar tyngd av arbete och år.
+Så tar han av sig mössan, ser upp.
+Jag förstår av hans ansikte att han lyssnar inåt,
+att han hör psalmsång, att orgeln brusar,
+att något som legat gömt under tusen glömskor
+återuppstår och lever i hans sinnen.
+Barndop, vigsel, död.
+Människolivets stolpar passerar.
+Och jag som knappt har några religioner kvar
+får vara med om en andakt bortom alla liturgier.`
+  },
+  {
+    number: 2,
+    lat: 60.6152,
+    lng: 16.7848,
+    title: "I åttan, där vevaxlarna...",
+    description:
+      "Vid ånghammaren nedanför Sandviks gamla huvudkontor finns dikten I åttan, där vevaxlarna... ur ”Sotfragment” (1949).",
+    // I PDF heter denna sida "Ånghammaren" och texten börjar med "I åttan, där vevaxlarna..."
+    poem: `I åttan, där vevaxlarna till oceanernas
+Trampfartyg och de bländande vita passagerarångarna smiddes,
+fanns det en reglerare, som lade sitt fickur på städet
+och lät hammaren falla med full kraft – utan att krossa glaset.
+Den känseln i fingrarna skulle kanske gjort honom till kirurg
+eller varför inte urmakare?
+Han var nästa ensam i världen om sitt konststycke.`
+  },
+  {
+    number: 3,
+    lat: 60.6160,
+    lng: 16.7815,
+    title: "Kärleksbrev",
+    description:
+      "Vid norra sluttningen ner mot Dal-Britas damm, sitter dikten Kärleksbrev, ur diktsamlingen ”Livets starka smak” (1974).",
+    poem: `Klagar lommen på din sjö, övergiven?
+Ack, då vet du att min längtan är för stor,
+för att rymmas i bröstet.
+Stiger ni ur sommarbåten med breda vita hattar
+och låter skratten krusa sjön,
+för att sedan glitterlikt bäras bort av vinden?
+Är månen uppe och vaktar vid ditt fönster om kvällen,
+borrar den hål i din rullgardin
+med det solbrända herdelandskapet?
+Hörde du min viskning, förmedlad av syrsan?
+
+Jag vet ej riktigt vad som pågår här i ensamheten,
+men jag läser dina brev i gräsets dagg
+och skriver vers på havets vatten.
+Jag kvider ofta, oförmodat, gråter, bär mig åt, hulkar, rasar.
+Detta för att jag saknar dina ögon så,
+Stjärnelika under hattens brätte,
+brunnar där min törst kan släckas.
+Ropar lommen på din sjö?
+Då vet du hur mitt hjärta har det i sin heta smedja.`
+  },
+  {
+    number: 4,
+    lat: 60.6169185,
+    lng: 16.7797732,
+    title: "Bandvalsaren",
+    description:
+      "På gräsmattan, mitt emot entrén till Smedsgårdens museum, återfinns dikten Bandvalsaren, ur diktsamlingen ”Sotfragment” (1949).",
+    poem: `Med sparsamhet och övertid drog han fram tre pojkar till studenten.
+Han andades och levde genom dem, de blev trappor mot solen.
+Själv har han aldrig varit på bio eller teater
+eller haft tid att läsa böcker.
+De har lyckats och kommer hem till helgerna
+och talar med främmande röster om dessa ting.
+Deras kvinnor har kalla ögon
+och föraktar honom när han äter med kniv.
+Han ska aldrig förstå vem som murat hans ensamhet.`
+  },
+  {
+    number: 5,
+    lat: 60.6150,
+    lng: 16.7760,
+    title: "Tvätterska",
+    description:
+      "Dikten Tvätterska, ur diktsamlingen ”Molnskugga” (1955), finns att läsa i parken nära kanalen vid Barrsätragatsbron.",
+    poem: `Som vore smuts ondska dunkar hon vid klappbryggan,
+vid vårens första vak och när björkar singlar sina löv om hösten.
+Tidigt änka.
+Hennes ansikte är utslätat av bykar, av lut, av löddrig såpa.
+Det finns en fattigdomens bistra frost i hennes öga,
+som inga tvättar tar.
+Herre, se glad ut i din himmel, håll rent,
+låt det dofta av rena sommarkläder när hon kommer!
+Skura trappan med sand och göm den svarta blåställsfloden.
+Ty det finns ej fläck i hennes öde.`
+  },
+  {
+    number: 6,
+    lat: 60.6190,
+    lng: 16.7740,
+    title: "Himlafrukost",
+    description:
+      "Dikten Himlafrukost ur ”Livets starka smak (1974) finns på slaggstensmuren till vänster bakom restaurangen The Church.",
+    poem: `Jag tror nog att far min reder sig i himlen,
+ty det är där han är om det är rättvist.
+Den som alltid passar tiden
+och gjort rätt för sig i över femtio år
+bör få umgås med de andra änglabarnen.
+Är det söndag gör han i ordning spicken sill,
+han skär rejäla bitar på skärbrädan av äkta ceder.
+Till detta färsk potatis, som själv kryper ur skalet,
+en driva gräslök, sur tjock grädde.
+Vilka mulliga kor i de ängderna!
+
+En stor sup på bordet, källarsvalt öl,
+hårt spisbröd med smör, nykärnat
+och brett med stort slöseri.
+En sådan himlafrukost unnar jag honom.
+Till aftonvarden får han supanmat, eller välling,
+kanske kornmjölsgröt, len som ängsull i magen.
+
+Nog reder sig far min i himlen
+bara han slipper kalla korkmattor.
+På domedagen tar han emaljögat ur västfickan,
+ty han är skötsam och håller styvt på ordning.
+När han tar fram det torde även Gud rysa.`
+  },
+  {
+    number: 7,
+    lat: 60.6198,
+    lng: 16.7730,
+    title: "Sätt du fram ur sommarns nätta nyponskålar...",
+    description:
+      "Vid stadshuset, och Smedsgatans norra ände, finner du dikten Sätt du fram ur sommarns nätta nyponskålar..., från diktsamlingen ”Läkebok, nedresa” (1993).",
+    poem: `Sätt du fram ur sommarns nätta nyponskålar
+en dekokt på klarbär, smultron – extra mycket –
+krasigt mos på hallon, även tistron,
+späd med saliven från syren, kaprifol och andra nektargömm en,
+rör tre motsolsvarv, låt stå och dra,
+men ej mitt i solen, då förflyktigas aromen.
+Smörj mina ögonlock därmed, fukta min tunga,
+stryk min panna ren, nästla in av dessa livets safter
+sju teskedar i taget i min mun.
+
+De får inte vara större än de skedar som de små brukar
+när de bosätter sig på baksidan av olvonbladen
+och som de plägar nyttja innan hösten nyper till.
+Välhängd gulmåra är gott därtill.
+Missförstå mig inte, det rör doften, inte halmen.
+Läs ur din stora Läkebok för mig, men gå varligt fram i texten.
+Ty jag är förtappad i så motto att också kärleken har blivit skör,
+den orkar knappt med tyngden av slåtterblommans kronblad, de ögonljusa.
+Säg att det står i boken att vi vistas här en stund
+innan skymningen tar överhanden
+och att vi tecknar våra namn på det stora konvolutet
+som en sista åtgärd.
+Vad är det för fjärilsfladder, som nu tar plats bakom ögonlocken.`
+  },
+  {
+    number: 8,
+    lat: 60.6208395,
+    lng: 16.7802191,
+    title: "Anteckningar om arbetet",
+    description:
+      "Anteckningar om arbetet ingår i diktsamlingen ”Livets starka smak” (1974). Den finner du på muren vid konsthallens entré.",
+    // I PDF står rubriken "Anteckningar kring arbetet" (innehållet är detta)
+    poem: `Den orangefärgade röken från rostugnen står vackert mot vinterhimlen,
+ett utropstecken som varslar om ekonomisk potens.
+Den påstås vara ofarlig.
+För övrigt måste människorna ha sin utkomst, ju.
+Närma dig den stora, vibrerande maskinen till fots.
+Då får du proportioner, den slukar nya km varje år.
+Du hör hur det dova morret växer till larm.
+Egentligen är ljuden ofarliga i sig, liksom det de representerar.
+Likaså röken, även om snön blir apelsingul.
+
+Bara man inte kommer i närheten,
+bara man inte fumlar med maskinen och riskerar en lem,
+bara man inte ställer sig i vägen för elden,
+för fallande last, för alla verktyg och redskap och grejor,
+som bearbetar människokött lika opersonligt som metaller.
+Veterligen har industrialismen inte för avsikt att göra någon illa.
+Gifter, rök, syror, gaser, damm och annat sattyg,
+som oturligt nog råkar bli biprodukter
+är inte illa menade eller avsedda att skada natur och människor.
+Allting tillverkas med de bästa avsikter.
+Den apelsinfärgade röken är endast ett bevis
+för att idog kapitalinsamling pågår.
+Antasta den avsikten om du kan!`
+  }
+];
