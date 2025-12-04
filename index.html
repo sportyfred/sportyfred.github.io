@@ -90,16 +90,17 @@
           title: m.title
         });
 
-        const content = `
-          <div>
-            <h2>${m.title}</h2>
-            <p>${m.description}</p>
-            <div class="poem-wrap">
-              <div class="poem">${escapeHtml(m.poem)}</div>
-            </div>
-            #Läs dikten</a>
-            <br/>
-            <a href="#" class="route-to" data-lat="${m.lat      `;
+const content = `
+  <div>
+    <h2>${m.title}</h2>
+    <p>${m.description}</p>
+    <div class="poem-wrap">
+      <div class="poem">${escapeHtml(m.poem)}</div>
+    </div>
+    #Läs dikten</a>
+    <br/>
+    <a href="#" class="route-to" datav>
+`;
 
         marker.addListener("click", () => {
           infoWindow.setContent(content);
