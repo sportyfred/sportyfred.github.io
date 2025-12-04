@@ -1,4 +1,4 @@
-[
+const markers = [
   {
     number: 1,
     lat: 60.6223,
